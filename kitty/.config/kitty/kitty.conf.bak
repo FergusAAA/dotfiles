@@ -1,0 +1,59 @@
+# BEGIN_KITTY_THEME
+# Catppuccin-Frappe
+include current-theme.conf
+# END_KITTY_THEME
+
+#font
+font_size		16
+font_family		JetBrainsMono Nerd Font
+
+#window
+#隐藏标题
+hide_window_decorations		titlebar-only
+window_padding_width		15
+window_margin_width 5
+background_opacity			0.8
+background_blur				30
+#窗口大小
+remember_window_size		no
+initial_window_width		105c
+initial_window_height		33c
+# active_border_color 		#eeffbb
+# inactive_border_color 		#5959aa
+# bell_border_color 			#ff5a00
+window_border_width 		2pt
+
+#tab bar
+tab_bar_edge 			bottom
+tab_bar_style			powerline
+tab_powerline_style		slanted
+tab_title_max_length	10
+
+
+#key map
+macos_option_as_alt 	yes
+#window操作
+map cmd+enter 	new_window
+map cmd+w		close_window
+map cmd+ctrl+[	next_window
+map cmd+ctrl+]	previous_window
+map cmd+ctrl+1	first_window
+map cmd+ctrl+2	second_window
+map cmd+ctrl+3	third_window
+map cmd+ctrl+4	fourth_window
+map cmd+ctrl+s	focus_visible_window
+map cmd+ctrl+r	start_resizing_window
+map cmd+ctrl+h	move_window_forward
+map cmd+ctrl+l	move_window_backward
+map cmd+ctrl+k	move_window_to_top
+map cmd+ctrl+z toggle_layout stack
+#tab操作
+map cmd+1		goto_tab 1
+map cmd+2		goto_tab 2
+map cmd+3		goto_tab 3
+map cmd+4		goto_tab 4
+#其他操作
+#打开配置文件
+map cmd+, edit_config_file
+#隐藏其他程序页面
+map cmd+h hide_macos_other_apps
