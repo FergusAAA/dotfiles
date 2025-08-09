@@ -5,8 +5,8 @@ if wezterm.config_builder then
 end
 
 -- 初始大小
-c.initial_cols = 140
-c.initial_rows = 38
+c.initial_cols = 120
+c.initial_rows = 31
 
 -- 关闭时不进行确认
 c.window_close_confirmation = "NeverPrompt"
@@ -17,23 +17,23 @@ c.default_prog = { "wsl", "--distribution", "Arch", "--cd", "/home/fergus" }
 -- 配置颜色主题
 c.color_scheme = "Catppuccin Frappe"
 
+c.font = wezterm.font("Maple Mono NF CN", { weight = "Light", stretch = "Normal", style = "Italic" })
+
 -- 如果只有一个tab就隐藏tab_bar
 c.hide_tab_bar_if_only_one_tab = true
 
 -- 取消windows原生标题栏
--- c.window_decorations = "NORMAL"
+c.window_decorations = "RESIZE"
 
--- 滚动条尺寸为 15 ，其他方向不需要 pad
-c.window_padding = { left = 0, right = 15, top = 0, bottom = 0 }
 -- 启用滚动条
 c.enable_scroll_bar = true
 
 -- 边距
 c.window_padding = {
-	left = 30,
-	right = 30,
-	top = 10,
-	bottom = 20,
+	left = "2cell",
+	right = "1cell",
+	top = "0.5cell",
+	bottom = "0.5cell",
 }
 
 -- 设置背景透明度
@@ -52,7 +52,7 @@ c.disable_default_key_bindings = true
 
 local act = wezterm.action
 
--- c.leader = { key = "g", mods = "CTRL", timeout_milliseconds = 3000 }
+c.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 3000 }
 
 c.keys = {
 	-- Ctrl+Shift+Tab 遍历 tab
@@ -75,22 +75,23 @@ c.keys = {
 	{ key = "T", mods = "CTRL", action = act.ShowLauncher },
 	-- Ctrl+Shift+Enter 显示启动菜单
 	{ key = "Enter", mods = "SHIFT|CTRL", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS|LAUNCH_MENU_ITEMS" }) },
+	{ key = " ", mods = "SHIFT|CTRL", action = act.QuickSelect },
 	-- tmux类似的多路复用快捷键
 	-- 还是使用zellij代替,更强大
-	-- { key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	-- { key = '"', mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	-- { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
-	-- { key = "W", mods = "SHIFT|CTRL", action = act.CloseCurrentPane({ confirm = false }) },
-	-- { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-	-- { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-	-- { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-	-- { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-	-- { key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 5 }) },
-	-- { key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
-	-- { key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
-	-- { key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 5 }) },
-	-- { key = "s", mods = "LEADER", action = act.PaneSelect({ mode = "SwapWithActive" }) },
-	-- { key = "E", mods = "LEADER", action = act.EmitEvent("trigger-vim-with-scrollback") },
+	{ key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = '"', mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+	{ key = "W", mods = "SHIFT|CTRL", action = act.CloseCurrentPane({ confirm = false }) },
+	{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+	{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+	{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+	{ key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 5 }) },
+	{ key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
+	{ key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
+	{ key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 5 }) },
+	{ key = "s", mods = "LEADER", action = act.PaneSelect({ mode = "SwapWithActive" }) },
+	{ key = "E", mods = "LEADER", action = act.EmitEvent("trigger-vim-with-scrollback") },
 }
 
 return c

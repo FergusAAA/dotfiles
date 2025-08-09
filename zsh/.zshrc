@@ -6,6 +6,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
+
 plugins=(git rust zsh-autosuggestions zsh-syntax-highlighting z)
 
 source $ZSH/oh-my-zsh.sh
@@ -17,6 +18,9 @@ alias vim="nvim"
 alias ls="eza --icons"
 alias tree="eza -a --icons -TL=3"
 alias man="tldr"
+
+# starship
+eval "$(starship init zsh)"
 
 # show pokemon
 pokemon-colorscripts --no-title -r 1,3,6
