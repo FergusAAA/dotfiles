@@ -11,13 +11,15 @@ plugins=(git rust zsh-autosuggestions zsh-syntax-highlighting z)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=/home/fergus/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=/mnt/d/workspace/SDK/platform-tools:$PATH
 
 
 alias vim="nvim"
 alias ls="eza --icons"
 alias tree="eza -a --icons -TL=3"
 alias man="tldr"
+alias adb="adb.exe"
 
 # starship
 eval "$(starship init zsh)"
@@ -27,23 +29,10 @@ pokemon-colorscripts --no-title -r 1,3,6
 
 export HAS_BIG_BANG="yes"
 
-# fzf
-source <(fzf --zsh)
-# ripgrep->fzf->vim [QUERY]
-rfv() (
-  RELOAD='reload:rg --column --color=always --smart-case {q} || :'
-  OPENER='if [[ $FZF_SELECT_COUNT -eq 0 ]]; then
-            vim {1} +{2}     # No selection. Open the current line in Vim.
-          else
-            vim +cw -q {+f}  # Build quickfix list for the selected items.
-          fi'
-  fzf --disabled --ansi --multi \
-      --bind "start:$RELOAD" --bind "change:$RELOAD" \
-      --bind "enter:become:$OPENER" \
-      --bind "ctrl-o:execute:$OPENER" \
-      --bind 'alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview' \
-      --delimiter : \
-      --preview 'bat --style=full --color=always --highlight-line {2} {1}' \
-      --preview-window '~4,+{2}+4/3,<80(up)' \
-      --query "$*"
-)
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
